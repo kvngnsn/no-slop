@@ -1,5 +1,5 @@
 ---
-name: wording-instruct
+name: no-slop-instruct
 description: >-
   Write how-to guides, tutorials, procedures, and onboarding steps. Use when a reader must complete an action correctly, with verified steps and relevant conditions.
 ---

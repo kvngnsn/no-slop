@@ -11,7 +11,7 @@ import skills
 
 class SkillToolsTests(unittest.TestCase):
     def setUp(self):
-        self.temp = tempfile.TemporaryDirectory(prefix="wording-tools-")
+        self.temp = tempfile.TemporaryDirectory(prefix="no-slop-tools-")
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name) / "project"
         self.home = Path(self.temp.name) / "home"

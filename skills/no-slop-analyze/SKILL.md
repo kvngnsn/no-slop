@@ -1,5 +1,5 @@
 ---
-name: wording-analyze
+name: no-slop-analyze
 description: >-
   Write analytical memos, evidence comparisons, research syntheses, and qualified recommendations. Use when the task is to weigh evidence or alternatives rather than advocate a fixed conclusion.
 ---

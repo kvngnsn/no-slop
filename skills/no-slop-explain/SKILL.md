@@ -1,5 +1,5 @@
 ---
-name: wording-explain
+name: no-slop-explain
 description: >-
   Write clear explanations, articles, FAQs, and factual updates for a specified reader. Use when the goal is understanding rather than advocacy, evidence analysis, or a procedure.
 ---

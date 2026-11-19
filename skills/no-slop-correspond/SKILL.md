@@ -1,5 +1,5 @@
 ---
-name: wording-correspond
+name: no-slop-correspond
 description: >-
   Draft emails, outreach, letters, follow-ups, and replies for a particular recipient and relationship. Preserve the real context and make the requested response clear.
 ---

@@ -1,5 +1,5 @@
 ---
-name: wording-persuade
+name: no-slop-persuade
 description: >-
   Write persuasive proposals, pitches, advocacy, and campaign copy for a specific decision or action. Build an honest case, address relevant objections, and keep claims within the evidence.
 ---

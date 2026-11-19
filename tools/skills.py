@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate, install, or package the six Wording skills without dependencies."""
+"""Validate, install, or package the six no-slop writing skills without dependencies."""
 
 import argparse
 import json
@@ -12,9 +12,8 @@ import tempfile
 from urllib.parse import unquote, urlparse
 import zipfile
 
-NAMES = tuple("wording-" + part for part in (
-    "analyze", "correspond", "edit", "explain", "instruct", "persuade"
-))
+NAMES = ("no-slop", "no-slop-analyze", "no-slop-correspond",
+         "no-slop-explain", "no-slop-instruct", "no-slop-persuade")
 PROVIDERS = {"codex": ".agents", "claude": ".claude"}
 ROOT = Path(__file__).resolve().parent.parent
 

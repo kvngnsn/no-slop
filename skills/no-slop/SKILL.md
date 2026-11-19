@@ -1,5 +1,5 @@
 ---
-name: wording-edit
+name: no-slop
 description: >-
   Revise supplied prose for clarity, flow, concision, or a requested voice while preserving its meaning. Use for explicit editing or rewriting without inventing facts or changing commitments.
 ---

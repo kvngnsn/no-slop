@@ -1,108 +1,99 @@
-# Wording
+# no-slop — AI writing skills for clear, natural prose
 
-One pack of six writing skills for **Claude Code and Codex**.
+Six open-source writing and editing skills for **Claude Code, Codex and other Agent Skills-compatible assistants**. Remove AI slop, vague claims, canned transitions and unnecessary words while preserving facts, qualifications and the writer's meaning.
 
-## Why this exists
+[![Download](https://img.shields.io/github/v/release/kvngnsn/no-slop?label=download)](https://github.com/kvngnsn/no-slop/releases/latest) [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE) [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-portable-2d6a4f)](https://agentskills.io/specification)
+[![Checks](https://github.com/kvngnsn/no-slop/actions/workflows/check.yml/badge.svg)](https://github.com/kvngnsn/no-slop/actions/workflows/check.yml)
 
-An AI draft can be fluent and still make the reader work too hard. The main point gets buried. Abstract phrases hide who does what. A confident conclusion goes further than its evidence. A shorter rewrite quietly drops a condition that mattered.
+**Start here:** [install](#install) · [choose a skill](#choose-a-skill) · [examples](#what-changes) · [download ZIPs](https://github.com/kvngnsn/no-slop/releases/latest)
 
-“Make it better” leaves the model to decide what better means. Writing has different jobs: an explanation should help someone understand; a proposal should justify a decision; instructions should help someone complete a task. The same polished voice and structure will not serve all three equally well.
+Formerly **Wording**. The default editing skill is now `no-slop`; the five other writing modes use the `no-slop-` prefix.
 
-Wording turns those jobs into reusable instructions. Each skill identifies the reader's need, chooses a suitable structure, and checks the result against the source material. The shared priorities are:
+## What changes
 
-- **Meaning:** name supported actors and actions, clarify references, and remove empty emphasis.
-- **Fidelity:** preserve facts, uncertainty, conditions, commitments, and the writer's actual position.
-- **Reader fit:** adapt detail, organization, tone, and the next step to the audience and purpose.
-- **Useful revision:** fix a specific weakness, then stop when the brief is met.
+| Before | After |
+|---|---|
+| “We leverage a robust framework to facilitate seamless collaboration.” | “The team edits the same document together.” *Use only if that feature is supported.* |
+| “The small pilot could facilitate a reduction in waiting time, although the limited sample does not permit confident generalization.” | “The small pilot may reduce waiting time, but the limited sample does not show whether it would help elsewhere.” |
+| “I am reaching out to explore potential synergies.” | “Could we meet for 15 minutes to discuss the prototype?” *Use only when that is the actual request.* |
 
-This reduces the need to paste the same editorial instructions into every conversation. It also gives revisions a clearer target than a list of banned words. Sentence length, passive voice, headings, and technical terms remain choices governed by the task.
+These illustrate the editing approach, not measured model results. The aim is clearer meaning and appropriate voice, without inventing evidence or erasing uncertainty. This is not an AI-detector bypass tool.
 
-## Choose a skill
+## Install
 
-| Skill | Reader's job | Typical uses |
-| --- | --- | --- |
-| [wording-explain](skills/wording-explain/SKILL.md) | Understand | Explanations, articles, FAQs, factual updates |
-| [wording-persuade](skills/wording-persuade/SKILL.md) | Choose or act | Proposals, pitches, advocacy, persuasive copy |
-| [wording-analyze](skills/wording-analyze/SKILL.md) | Weigh evidence | Research synthesis, comparisons, recommendations |
-| [wording-instruct](skills/wording-instruct/SKILL.md) | Complete a task | Tutorials, procedures, onboarding |
-| [wording-correspond](skills/wording-correspond/SKILL.md) | Respond | Emails, outreach, requests, follow-ups |
-| [wording-edit](skills/wording-edit/SKILL.md) | Improve a draft | Clarity, structure, concision, voice adaptation |
+### Claude Code and Codex
 
-Choose one primary skill. Use `analyze` for an open question and `persuade` for an explicit advocacy task. Use `correspond` when the recipient and relationship shape the message. Each skill is self-contained.
-
-## Install the pack
-
-Download and extract a release, or clone this repository. From its root, use **Python 3.9 or later**:
+Requires Python 3.9+ for the installer; the writing instructions themselves are plain Markdown.
 
 ```sh
-# Preview installation for both tools.
-python3 tools/skills.py install --scope user
-
-# Install all six skills for use across projects.
+git clone https://github.com/kvngnsn/no-slop.git
+cd no-slop
 python3 tools/skills.py install --scope user --apply
 ```
 
-The installer links the shared `skills/` folders into `~/.agents/skills` for Codex and `~/.claude/skills` for Claude Code. Keep the downloaded folder in place while using linked installations. Existing unrelated files are never overwritten.
+This installs all six skills as links in `~/.claude/skills` and `~/.agents/skills`. Keep this checkout in place. Existing unrelated files are never overwritten. Open a new session after installing.
 
-Options:
+- Add `--provider claude` or `--provider codex` to install for one host.
+- Omit `--scope user` for project-only installation; those links survive moving the project.
+- Add `--copy` for independent copies instead of links. Copies need separate updates.
+- Omit `--apply` to preview the install without changes.
 
-- Omit `--scope user` to install only in this project. Project links are relative and survive moving the folder.
-- Add `--provider codex` or `--provider claude` to select one tool.
-- Add `--copy` for independent copies where symlinks are unsuitable. Copies need separate updates.
+**Claude Code:** `/no-slop Rewrite this draft clearly. Preserve every fact and qualification: …`
 
-Open a new session if the skills do not appear. See the official [Codex](https://learn.chatgpt.com/docs/build-skills) and [Claude Code](https://code.claude.com/docs/en/skills) documentation for discovery and invocation details.
+**Codex:** `$no-slop Rewrite this draft clearly. Preserve every fact and qualification: …`
 
-## Use a skill
+### Upload or use another model
 
-**Codex**
+The [latest release](https://github.com/kvngnsn/no-slop/releases/latest) includes a full pack ZIP and six individual skill ZIPs. For hosts that import one skill at a time, upload the corresponding individual ZIP. For a manual setup, give your assistant the relevant `skills/<name>/SKILL.md` file. A capable local-model agent can use the same instructions; available tools and model quality still matter.
 
-```text
-$wording-explain Explain this feature to a first-time user. Use only the facts below: …
-```
-
-**Claude Code**
-
-```text
-/wording-persuade Draft a proposal for this audience, using this evidence: …
-```
-
-Descriptions also support automatic selection. For a more precise brief, supply whichever fields matter:
-
-```text
-Reader:
-What the reader should understand or do:
-Source facts or material:
-Required length or format:
-Voice sample or tone preference:
-```
-
-The skills follow the requested genre and format. They use available sources and tools without pretending to have verified inaccessible material. A draft does not authorize sending, publishing, or making commitments.
-
-### Claude.ai
-
-Claude.ai imports individual skills through **Customize → Skills**. Generate one upload ZIP per skill:
+To build upload archives yourself:
 
 ```sh
 python3 tools/skills.py package --output packages
 ```
 
-Upload the generated ZIPs separately. Each contains a skill folder with `SKILL.md` inside it. The full pack archive is for distribution and local installation; Claude.ai requires these individual upload files. [Upload instructions](https://support.claude.com/en/articles/12512198-how-to-create-custom-skills).
+See the [open Agent Skills format](https://agentskills.io/specification) and your host's current skill-import instructions. No provider API key or hosted service is required by this pack.
 
-## Design basis and limits
+## Choose a skill
 
-The pack uses the open [Agent Skills format](https://agentskills.io/specification), with provider-neutral instructions and concise `name`/`description` metadata. The approach draws on [plain-language principles](https://www.archives.gov/open/plain-writing/10-principles.html) and [explicit outcomes and relevant examples in prompting](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices). The [discussion that prompted this project](https://x.com/zhizdev/status/2119874095269707977) is useful motivation; its informal chart is not a validated model ranking.
+| Skill | Job | Typical use |
+|---|---|---|
+| [no-slop](skills/no-slop/SKILL.md) | Edit a draft | Clarity, concision, structure and voice |
+| [no-slop-explain](skills/no-slop-explain/SKILL.md) | Explain | Articles, FAQs and technical explanations |
+| [no-slop-persuade](skills/no-slop-persuade/SKILL.md) | Make a case | Proposals, pitches, advocacy and copywriting |
+| [no-slop-analyze](skills/no-slop-analyze/SKILL.md) | Weigh evidence | Research synthesis, comparisons and recommendations |
+| [no-slop-instruct](skills/no-slop-instruct/SKILL.md) | Teach a procedure | Tutorials, onboarding and documentation |
+| [no-slop-correspond](skills/no-slop-correspond/SKILL.md) | Write to someone | Email, outreach, requests and follow-ups |
 
-These are writing instructions, not a guarantee of accuracy or a universally best style. Quality depends on the model, the brief, and the supplied evidence. Review important claims and judge the output by what the intended reader can understand or do.
+Choose one primary mode. Each skill is self-contained. Useful context: reader, purpose, source facts, required length/format and a voice sample when relevant.
 
-## Check the pack
+## Why six modes?
+
+An explanation helps someone understand; a proposal supports a decision; instructions help someone complete a task. A single generic “make this better” prompt does not define success for all three.
+
+Each skill chooses structure for the reader's job, develops supported points and checks the finished writing against the source. Plain language does not mean deleting technical detail or forcing every sentence to be short. The pack follows [plain-language principles](https://www.archives.gov/open/plain-writing/10-principles.html) and preserves the user's requested genre, voice and evidence limits.
+
+A drafting request does not authorize sending, publishing or making commitments. The pack does not verify sources it cannot access, promise detector scores or establish a universally best style.
+
+## Updating from Wording
+
+GitHub redirects the old repository URL. Update your remote with `git remote set-url origin https://github.com/kvngnsn/no-slop.git`, pull, then run the installer again. `wording-edit` becomes `no-slop`; the other five names change from `wording-…` to `no-slop-…`. Remove an old installed entry only after confirming it belongs to Wording; do not delete unrelated skills or locally modified copies. Old release archives remain available as historical versions.
+
+## Checks and contributions
 
 ```sh
 python3 tools/skills.py validate
 python3 -m unittest discover -s tools -p 'test_*.py'
 ```
 
-The checks cover metadata, references, installation, collision handling, and upload archives. They do not measure writing quality. Tests use synthetic temporary folders.
+The checks cover metadata, installation collisions, relocation and ZIP integrity; they do not measure writing quality. For an improvement, include a fictional or public before/after example, explain what meaning must survive, and describe the observed failure. Keep private drafts out of issues and pull requests.
 
-## License
+[MIT license](LICENSE).
 
-[MIT](LICENSE).
+## Related open-source skills
+
+| Project | Use it for |
+|---|---|
+| [click-everything](https://github.com/kvngnsn/click-everything) | Exploratory UI testing, reproducible bugs and regression tests. |
+| [startupassist](https://github.com/kvngnsn/startupassist) | Startup legal documents, founder equity and financing templates. |
+| [patentassist](https://github.com/kvngnsn/patentassist) | Invention intake, prior-art research and patent application drafting. |
